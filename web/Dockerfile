@@ -29,7 +29,7 @@ RUN apt update -y && apt install -y  --no-install-recommends \
     netcat \
     postgresql \
     python3 \
-	nmap \
+    nmap \
     python3-dev \
     python3-pip \
     python3-netaddr \
@@ -42,8 +42,8 @@ RUN apt update -y && apt install -y  --no-install-recommends \
     libpangoft2-1.0-0 \
     geoip-bin \
     geoip-database \
-	software-properties-common \
-	unzip \
+    software-properties-common \
+    unzip \
     firefox-geckodriver  #install Download geckodriver
 
 
@@ -117,10 +117,13 @@ RUN rm naabu_2.1.8_linux_amd64.zip
 RUN mv naabu /go/bin
 
 # Install  katana
+
 RUN wget https://github.com/projectdiscovery/katana/releases/download/v1.0.5/katana_1.0.5_linux_arm64.zip
 RUN unzip -o katana_1.0.5_linux_arm64.zip
 RUN rm katana_1.0.5_linux_arm64.zip
 RUN mv katana /go/bin
+
+
 
 # Update Nuclei and Nuclei-Templates
 RUN nuclei -update
@@ -138,6 +141,17 @@ RUN python3 -m pip install fuzzywuzzy \
     python-Levenshtein \
     pyvirtualdisplay \
     netaddr
+
+RUN rm -rf /usr/src/github/EyeWitness
+WORKDIR /usr/src/github/
+RUN git clone https://github.com/RedSiege/EyeWitness.git
+RUN bash /usr/src/github/EyeWitness/Python/setup/setup.sh
+
+RUN wget https://github.com/mozilla/geckodriver/releases/download/v0.34.0/geckodriver-v0.34.0-linux-aarch64.tar.gz
+RUN tar -xzf geckodriver-v0.34.0-linux-aarch64.tar.gz -C /usr/sbin
+RUN rm geckodriver-v0.34.0-linux-aarch64.tar.gz
+
+WORKDIR /usr/src/app
 
 # Copy source code
 COPY . /usr/src/app/
