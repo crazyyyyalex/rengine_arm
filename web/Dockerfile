@@ -47,16 +47,6 @@ RUN apt update -y && apt install -y  --no-install-recommends \
     firefox-geckodriver  #install Download geckodriver
 
 
-
-# Download and install go 1.20
-
-#RUN wget https://go.dev/dl/go1.20.11.linux-arm64.tar.gz
-#RUN tar -xvf go1.20.11.linux-arm64.tar.gz
-#RUN rm go1.20.11.linux-arm64.tar.gz
-
-# Download and install go 1.21
-
-
 RUN wget https://go.dev/dl/go1.21.7.linux-arm64.tar.gz
 RUN tar -xvf go1.21.7.linux-arm64.tar.gz
 RUN rm go1.21.7.linux-arm64.tar.gz
@@ -83,6 +73,7 @@ RUN go install -v github.com/tomnomnom/assetfinder@latest
 RUN GO111MODULE=on go install -v github.com/tomnomnom/gf@latest
 RUN GO111MODULE=on go install -v github.com/tomnomnom/unfurl@latest
 RUN GO111MODULE=on go install -v github.com/tomnomnom/waybackurls@latest
+RUN GO111MODULE=on go install -v github.com/projectdiscovery/tlsx/cmd/tlsx@latest
 
 #2.03
 RUN GO111MODULE=on go install -v github.com/lc/gau/v2/cmd/gau@latest
